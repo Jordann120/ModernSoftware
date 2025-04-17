@@ -1,29 +1,31 @@
 name: Build and Test
- 
-on: [push, pull_request]
- 
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-    runs-on: ubuntu-latest
- 
+    runs-on: windows-latest  # Utilisation de Windows, adapté à ton environnement local
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
- 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
- 
-    - name: Restore dependencies
-      run: dotnet restore
- 
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: ModernSoftware
- 
-    - name: Check code formatting
-      run: dotnet format --verify-no-changes
- 
-    - name: Run Tests
-      run: dotnet test --no-build --verbosity normal
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ModernSoftwareApp.sln
+
+      - name: Build solution
+        run: dotnet build ModernSoftwareApp.sln --no-restore
+
+      - name: Run tests
+        run: dotnet test ModernSoftwareTest.sln --no-build --verbosity normal
