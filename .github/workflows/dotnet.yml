@@ -1,6 +1,6 @@
 name: Build and Test
 
-on: 
+on:
   push:
   pull_request:
 
@@ -19,9 +19,9 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore ModernSoftwareApp/ModernSoftwareApp.csproj
-        
+
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build ModernSoftwareApp/ModernSoftwareApp.csproj --no-restore
 
       - name: Run Tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test ModernSoftwareApp/ModernSoftwareApp.csproj --no-build --verbosity normal
