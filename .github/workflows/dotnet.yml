@@ -20,6 +20,7 @@ jobs:
  
     - name: Build
       run: dotnet build --no-restore
+      working-directory: ModernSoftwareApp
  
     - name: Check code formatting
       run: dotnet format --verify-no-changes
