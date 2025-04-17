@@ -25,3 +25,6 @@ jobs:
 
       - name: Run Tests
         run: dotnet test ModernSoftwareApp/ModernSoftwareApp.csproj --no-build --verbosity normal
+      - name: Check code formatting
+        run: dotnet format ModernSoftwareApp/ModernSoftwareApp.csproj --verify-no-changes
+
