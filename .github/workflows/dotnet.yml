@@ -29,3 +29,5 @@ jobs:
         run: dotnet format ModernSoftwareApp/ModernSoftwareApp.csproj --verify-no-changes
       - name: Read secret
         run: echo "Secret value is ${{ secrets.MY_SECRET }}"
+      - name: Simulated deploy
+        run: bash ./deploy.sh
